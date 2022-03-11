@@ -1,13 +1,14 @@
 using Application.Extensions;
 using Serilog;
 using WebApi.Extensions;
+using Persistence.Extensions;
+using Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = new ConfigurationBuilder()
      //Read from your appsettings.json.
-    .AddJsonFile("serilog-settings.json")
-    .AddJsonFile("app-settings.json")
+     .AddJsonFile("appsettings.json")
      //Read from your secrets.
     .AddUserSecrets<Program>(optional: true)
     .AddEnvironmentVariables()
@@ -18,9 +19,9 @@ builder.Services.AddSerilogLayer(configuration);
 try
 {
     // Add services to the container.
-
-    // Add Layer CWS.CORE
     builder.Services.AddAplicationLayer();
+    builder.Services.AddPersistenceInfraestructure(configuration);
+    builder.Services.AddShardInfraestructure(configuration);
 
     builder.Services.AddControllers();
 

@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Application.Behaviours;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,8 @@ namespace Application.Extensions
             services
                 .AddAutoMapper(assembly)
                 .AddValidatorsFromAssembly(assembly)
-                .AddMediatR(assembly);
+                .AddMediatR(assembly)
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         }
 
         public static void AddSerilogLayer(this IServiceCollection services, IConfiguration configuration)

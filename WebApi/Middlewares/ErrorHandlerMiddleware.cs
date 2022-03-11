@@ -35,7 +35,7 @@ namespace WebApi.Middlewares
 
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-                        _logger.Warning(exception, e.Message);
+                        _logger.Warning(exception.ToString(), e.Message);
 
                     break;
 
@@ -45,7 +45,7 @@ namespace WebApi.Middlewares
 
                         responseModel.Errors = e.Errors;
 
-                         _logger.Warning(exception, e.Errors.ToString());
+                         _logger.Warning(@$"{exception.Message}: {string.Join(", ", e.Errors)}");
 
                     break;
 
@@ -61,7 +61,7 @@ namespace WebApi.Middlewares
 
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                        _logger.Error(exception, messageTemplate: exception.Message);
+                        _logger.Error(exception, exception.Message);
 
                     break;
                 }

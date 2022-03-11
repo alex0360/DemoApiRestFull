@@ -2,6 +2,7 @@
 using Domain.Common;
 using Domain.Entites;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Persistence.Contexts
 {
@@ -25,14 +26,23 @@ namespace Persistence.Contexts
                 {
                     case EntityState.Added:
                         entry.Entity.Created = _dateTime.NowUtc;
+                        entry.Entity.CreatedBy = Environment.UserName;
+                        entry.Entity.CreatedOn = Environment.MachineName;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModified = _dateTime.NowUtc;
+                        entry.Entity.LastModifiedBy = Environment.UserName;
+                        entry.Entity.LastModifiedOn = Environment.MachineName;
                         break;
                 }
             }
 
             return base.SaveChangesAsync(cancellationToken);
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
