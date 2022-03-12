@@ -35,7 +35,7 @@ namespace WebApi.Middlewares
 
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-                        _logger.Warning(exception.ToString(), e.Message);
+                        _logger.Warning(e.Message);
 
                     break;
 
@@ -53,7 +53,7 @@ namespace WebApi.Middlewares
 
                         response.StatusCode = (int)HttpStatusCode.NotFound;
 
-                        _logger.Warning(exception, e.Message);
+                        _logger.Warning(e.Message);
 
                     break;
 

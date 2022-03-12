@@ -23,10 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Behaviours\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Features\Clients\Queries\GetAll\" />
-    <Folder Include="Features\Clients\Queries\GetById\" />
     <Folder Include="Filters\" />
     <Folder Include="Wrappers\" />
   </ItemGroup>
