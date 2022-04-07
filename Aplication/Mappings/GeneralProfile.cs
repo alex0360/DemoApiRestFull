@@ -11,7 +11,7 @@ namespace Application.Mappings
         {
             #region Model
             #region Client
-            CreateMap<Client, ClientModel > ();
+            CreateMap<Client, ClientModel> ();
             #endregion
             #endregion
 
